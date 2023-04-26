@@ -1,7 +1,7 @@
 # green-dog-delivery
 Sistema de pedidos de uma lanchonete 
 
-## Projeto pedido de uma lanchonete com Spring Boot Java e o Spring Security para a autenticação e autorização (3 perfis de autorização, ADMIN, MANAGER e COMMON_USER), usando docker para o servidor de banco de dados MSSQL.
+## Projeto de pedido de uma lanchonete com Spring Boot Java e o Spring Security para a autenticação e autorização (3 perfis de autorização, ADMIN, MANAGER e COMMON_USER), usando docker para o servidor de banco de dados MSSQL.
 
 ##Abaixo segue o link do arquivo do docker-compose.yml para você subir após ter instalado e configurado o docker em seu computador. O Arquivo pode ser colocado em qualquer lugar do seu computador e para você rodar deve executar o seguinte comando:
 
