@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+ <title>Item</title>
+</head>
+<body>
+	<h1 layout:fragment="header" class="colorWhite">Item</h1>
+	<div layout:fragment="content" class="well">
+		<div class="alert alert-success" th:if="${globalMessage}"
+			th:text="${globalMessage}">
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Preço</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td id="id" th:text="${item.id}"></td>
+					<td id="nome" th:text="${item.nome}"></td>
+					<td id="preco" th:text="'R$ ' + ${#numbers.formatDecimal(item.preco,2,2,'COMMA')}"></td>
+					<td id="status" th:text="${item.status} ? 'Ativo' : 'Inativo'"></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="btn-group" role="group">
+			<a href="form.html" th:href="@{'/itens/alterar/' + ${item.id}}" class="btn btn-warning">Alterar</a>
+			<a href="itens" th:href="@{'/itens/remover/' + ${item.id}}" class="btn btn-danger">Remover</a>
+			<a href="form.html" th:href="@{'/itens/novo/'}" class="btn btn-success">Novo</a>
+			<a th:href="@{/itens/}" href="itens.html" class="btn btn-primary">Voltar</a>
+		</div>
+	</div>
+</body>
+</html>

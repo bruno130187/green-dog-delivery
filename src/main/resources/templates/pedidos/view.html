@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>Pedido</title>
+</head>
+<body>
+<h1 layout:fragment="header" class="colorWhite">Pedido</h1>
+<div layout:fragment="content" class="well">
+    <div class="alert alert-success espacoAcimaAbaixo" th:if="${globalMessage}"
+         th:text="${globalMessage}">
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Data</th>
+            <th>Valor total</th>
+            <th class="tableView">Status</th>
+            <th colspan="100">Itens</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td id="id" th:text="${pedido.id}"></td>
+            <td id="nome" th:text="${pedido.cliente.nome}"></td>
+            <td id="data" th:text="${#dates.format(pedido.data,'dd/MM/yyyy hh:mm:ss')}"></td>
+            <td id="valorTotal" th:text="'R$ ' + ${#numbers.formatDecimal(pedido.valorTotal,2,2,'COMMA')}"></td>
+            <td id="status" class="statusPedido">
+                <span th:each="statusOpt : ${T(com.bruno.casadocodigo.greendogdelivery.api.FluxoPedidoEnum).values()}">
+                    <span th:if="${statusOpt.toString() == pedido.status.toString()}" th:text="${statusOpt.displayValue}"></span>
+                </span>
+            </td>
+            <td id="itens" th:each="item : ${pedido.itens}">
+                <div th:text="${item.nome} + ' - R$ ' + ${#numbers.formatDecimal(item.preco,2,2,'COMMA')}"></div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="btn-group" role="group">
+        <a href="form.html" th:href="@{'/pedidos/alterar/' + ${pedido.id}}" class="btn btn-warning">Alterar</a>
+        <a href="pedidos" th:href="@{'/pedidos/cancelar/' + ${pedido.id}}" class="btn btn-danger">Cancelar</a>
+        <a href="pedidos" th:href="@{'/pedidos/novo/'}" class="btn btn-success">Novo pedido</a>
+        <a onclick="history.go(-1)" class="btn btn-primary">Voltar</a>
+    </div>
+</div>
+</body>
+</html>

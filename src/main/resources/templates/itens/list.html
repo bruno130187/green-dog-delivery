@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+	<title>Itens</title>
+</head>
+<body>
+	<h1 layout:fragment="header" class="colorWhite">Lista de itens</h1>
+	<div layout:fragment="content" class="container">
+		<div class="container btn-group" role="group">
+			<a href="form.html" th:href="@{/itens/novo}" class="btn btn-primary">Novo item</a>
+			<a href="form.html" th:href="@{/}" class="btn btn-primary">Voltar</a>
+		</div>
+		<div class="alert alert-success espacoAcimaAbaixo" th:if="${globalMessage}"
+			th:text="${globalMessage}">
+		</div>
+		<div th:if="${errorMessage}" class="alert alert-warning classMessage espacoAcimaAbaixo"
+			 th:text="${errorMessage}">
+		</div>
+		<table class="table table-bordered table-striped table-lista">
+			<thead> 
+				<tr>
+					<td class="colorWhite tableView">ID</td>
+					<td class="colorWhite tableView">Nome</td>
+					<td class="colorWhite tableView">Preço</td>
+					<td class="colorWhite tableView">Status</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${itens.empty}">
+					<td colspan="10">Sem itens</td>
+				</tr>
+				<tr th:each="item : ${itens}">
+					<td><a href="view.html" th:href="@{'/itens/' + ${item.id}}" th:text="${item.id}"></a></td>
+					<td><a href="view.html" th:href="@{'/itens/' + ${item.id}}" th:text="${item.nome}"></a></td>
+					<td th:text="'R$ ' + ${#numbers.formatDecimal(item.preco,2,2,'COMMA')}"></td>
+					<td th:text="${item.status} ? 'Ativo' : 'Inativo'"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

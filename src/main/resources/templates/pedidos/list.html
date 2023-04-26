@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+	  layout:decorate="layout">
+<head>
+<title>Pedidos</title>
+</head>
+<body>
+	<h1 layout:fragment="header" class="colorWhite">Lista de pedidos</h1>
+	<div layout:fragment="content" class="container">
+		<div class="container btn-group" role="group">
+			<a href="form.html" th:href="@{/pedidos/novo}" class="btn btn-primary">Novo pedido</a>
+			<a href="form.html" th:href="@{/}" class="btn btn-primary">Voltar</a>
+		</div>
+		<div class="alert alert-success espacoAcimaAbaixo" th:if="${globalMessage}"
+			th:text="${globalMessage}">mensagem
+		</div>
+		<table class="table table-bordered table-striped table-lista">
+			<thead> 
+				<tr>
+					<td class="colorWhite tableView">ID</td>
+					<td class="colorWhite tableView">Cliente</td>
+					<td class="colorWhite tableView">Data</td>
+					<td class="colorWhite tableView">Valor total</td>
+					<td class="colorWhite tableView">Status</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${pedidos.empty}">
+					<td colspan="10">Sem pedidos</td>
+				</tr>
+				<tr th:each="pedido : ${pedidos}">
+					<td><a href="view.html" th:href="@{'/pedidos/' + ${pedido.id}}" th:text="${pedido.cliente != null} ? ${pedido.id}"></a></td>
+					<td><a href="view.html" th:href="@{'/pedidos/' + ${pedido.id}}" th:text="${pedido.cliente != null} ? ${pedido.cliente.nome}"></a></td>
+					<td th:text="${#dates.format(pedido.data,'dd/MM/yyyy')}"></td>
+					<td th:text="'R$ ' + ${#numbers.formatDecimal(pedido.valorTotal,2,2,'COMMA')}"></td>
+					<td>
+						<span th:each="statusOpt : ${T(com.bruno.casadocodigo.greendogdelivery.api.FluxoPedidoEnum).values()}">
+                   			<span th:if="${statusOpt.toString() == pedido.status.toString()}" th:text="${statusOpt.displayValue}"></span>
+                		</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+ <title>Cliente</title>
+</head>
+<body>
+	<h1 layout:fragment="header" class="colorWhite">Cliente</h1>
+	<div layout:fragment="content" class="well">
+		<div class="alert alert-success espacoAcimaAbaixo" th:if="${globalMessage}"
+			th:text="${globalMessage}">cliente gravado com sucesso</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Endereço</th>
+					<th>CEP</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td id="id" th:text="${cliente.id}"></td>
+					<td id="nome" th:text="${cliente.nome}"></td>
+					<td id="endereco" th:text="${cliente.endereco}"></td>
+					<td id="cep" th:text="${cliente.cep}"></td>
+					<td id="status" th:text="${cliente.status} ? 'Ativo' : 'Inativo'"></td>
+				</tr>
+			</tbody>
+		</table>
+			<div class="btn-group" role="group">
+				<a href="form.html" th:href="@{'/clientes/alterar/' + ${cliente.id}}" class="btn btn-warning">Alterar</a>
+				<a href="clientes" th:href="@{'/clientes/cancelar/' + ${cliente.id}}" class="btn btn-danger">Cancelar</a>
+				<a href="form.html" th:href="@{'/clientes/novo/'}" class="btn btn-success">Novo</a>
+				<a th:href="@{/clientes/}" href="clientes.html" class="btn btn-primary">Voltar</a>
+			</div>
+		</div>
+</body>
+</html>

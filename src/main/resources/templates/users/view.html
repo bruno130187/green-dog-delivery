@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+ <title>Usuário</title>
+</head>
+<body>
+	<h1 layout:fragment="header" class="colorWhite">Usuário</h1>
+	<div layout:fragment="content" class="well">
+		<div class="alert alert-success" th:if="${globalMessage}"
+			th:text="${globalMessage}">
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<td>ID</td>
+					<td>Usuário</td>
+					<td>Nome Completo</td>
+					<td>Status</td>
+					<td>Permissões</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><a href="view.html" th:href="@{'/users/' + ${user.id}}" th:text="${user.id}"></a></td>
+					<td><a href="view.html" th:href="@{'/users/' + ${user.id}}" th:text="${user.userName}"></a></td>
+					<td th:text="${user.fullName}"></td>
+					<td th:text="${user.enabled} ? 'Ativo' : 'Inativo'"></td>
+					<td>
+						<div th:each="role : ${user.getRoles}">
+							<button class="btn btn-info button-roles" th:if="${role == 'ADMIN'}">ADMIN</button>
+							<button class="btn btn-info button-roles" th:if="${role == 'MANAGER'}">MANAGER</button>
+							<button class="btn btn-info button-roles" th:if="${role == 'COMMON_USER'}">COMMON_USER</button>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="btn-group" role="group">
+			<a href="form.html" th:href="@{'/users/alterar/' + ${user.id}}" class="btn btn-warning">Alterar</a>
+			<a href="users" th:href="@{'/users/remover/' + ${user.id}}" class="btn btn-danger">Remover</a>
+			<a href="form.html" th:href="@{'/users/novo/'}" class="btn btn-success">Novo</a>
+			<a th:href="@{/users/}" href="list.html" class="btn btn-primary">Voltar</a>
+		</div>
+	</div>
+</body>
+</html>

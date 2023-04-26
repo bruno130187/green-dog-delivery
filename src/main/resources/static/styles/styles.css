@@ -1,0 +1,114 @@
+body{
+    background-color: #303134;
+}
+
+tr:nth-child(odd) {
+    background-color: #0A7E02;
+}
+
+tr:nth-child(even) {
+    background-color: #FAD88F;
+}
+
+th {
+    background-color: lightseagreen;
+}
+
+.table-lista{
+    margin-left: -12px;
+}
+
+.spanTitle{
+    margin-left: 20px;
+    color: #EEEEEE;
+}
+
+.jumbotronBack{
+    background-color: #FAFAFA;
+    width: 1140px;
+    height: 200px;
+    border-radius: 5px;
+    display: block;
+    margin-left: -15px;
+    padding: 20px;
+}
+
+.jumbotronLogin{
+    max-width: 99%;
+    display: block;
+    margin-left: -28px;
+    margin-right: auto;
+}
+
+.button-roles{
+    float: left;
+    display: block;
+    margin-left: 10px;
+}
+
+.botaoLoginDireita{
+    position: absolute;
+    margin-top: -50px;
+    margin-left: 68%;
+}
+
+.botaoLoginDireitaLogout{
+    color: #D3D3D3;
+    position: absolute;
+    margin-top: -70px;
+    margin-left: 42%;
+}
+
+.botaoLogoutDireita{
+    position: absolute;
+    margin-top: -50px;
+    margin-left: 170%;
+}
+
+.menu-principal{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nav-style{
+    border-radius: 5px;
+}
+
+.smallClass{
+    padding-left: 50px;
+    color: #D3D3D3;
+}
+
+.formInput{
+    width: 500px;
+}
+
+.button-padding{
+    padding: 10px;
+}
+
+.colorWhite{
+    color: #EEEEEE;
+}
+
+.classMessage{
+    margin-top: 15px;
+    margin-left: -15px;
+    max-width: 1140px;
+}
+
+.espacoAcimaAbaixo{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.statusPedido{
+    background-color: #FAD88F;
+    text-align: center;
+}
+
+.tableView{
+    text-align: center;
+}
+

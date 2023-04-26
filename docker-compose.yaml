@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    restart: always
+    container_name: sqlserver
+    ports:
+      - 1433:1433
+    volumes:
+      - ~/apps/mssql/data:/var/lib/mssqlql/data
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=A_Str0ng_Required_Password
+      - TZ=America/Sao_Paulo
+      - MSSQL_PID=Developer
+      - MSSQL_AGENT_ENABLED=True
+    command:
+      - /bin/sh
+      - -c
+      - "(/opt/mssql/bin/sqlservr &) && sleep 10s && /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P A_Str0ng_Required_Password -d master -Q 'CREATE DATABASE [greendog]; ALTER DATABASE [greendog] SET AUTO_CLOSE OFF;' && sleep infinity"
+  

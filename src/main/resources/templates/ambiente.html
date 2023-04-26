@@ -1,0 +1,37 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+<title>Ambiente</title>
+</head>
+<body>
+ <h1 layout:fragment="header" class="colorWhite">Ambiente - Spring Actuator</h1>
+ <div layout:fragment="content" class="container">
+    <div>
+        <table class="table table-bordered table-striped table-lista">
+            <thead>
+                <tr>
+                    <th>link</th>
+                    <th>descrição</th>
+                </tr>
+            </thead>
+            <tbody>
+            
+                <tr><td><p><a href="#" target="_blank" th:href="@{/actuator}">actuator</a></p></td><td><p>&nbsp;Lista todos os endpoints disponíveis.</p></td></tr>
+                <tr><td><p><a href="#" target="_blank" th:href="@{/actuator/threaddump}">threaddump</a></p></td><td><p>&nbsp;Faz um thread dump.</p></td></tr>
+                <tr><td><p><a href="#" target="_blank" th:href="@{/actuator/env}">env</a></p></td><td><p>&nbsp;Mostra properties do ConfigurableEnvironment do Spring.</p></td></tr>
+                <tr><td><p><a href="#" target="_blank" th:href="@{/actuator/health}">health</a></p></td><td><p>&nbsp;Mostra informações do status da aplicação.</p></td></tr>
+                <tr><td><p><a href="#" target="_blank" th:href="@{/actuator/metrics}">metrics</a></p></td><td><p>&nbsp;Mostra métricas da aplicação.</p></td></tr>
+                <tr><td><p><a href="#" target="_blank" th:href="@{/actuator/mappings}">mappings</a></p></td><td><p>&nbsp; Exibe os caminhos dos @RequestMapping.</p></td></tr>
+                <tr><td><p><a href="#" target="_blank" th:href="@{/actuator/httptrace}">httptrace</a></p></td><td><p>&nbsp;Exibe o  trace dos últimos 100 requests HTTP.</p></td></tr>
+ 
+            </tbody>
+        </table>
+        <br/>
+        <div class="btn-group" role="group">
+            <a href="#" target="_blank" th:href="@{/properties}" class="btn btn-large btn-success">System Properties</a>
+            <a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints" target="_blank" class="btn btn-large btn-success">Lista completa de endpoints</a>
+            <a href="#" th:href="@{/}" class="btn btn-large btn-primary">Voltar</a>
+        </div>
+    </div>
+ </div>
+</body>
+</html>

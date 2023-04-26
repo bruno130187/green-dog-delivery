@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+	<script th:inline="javascript">
+		$(document).ready(function(){
+			$(".number").mask("00000000", {reverse: true});
+			$("#globalMessage").hide();
+		});
+		function validaFormClientes() {
+			if ($("#cep").val().length < 8) {
+				$("#globalMessage").show();
+				$("#globalMessage").html("O Cep precisa ter 8 caracteres!");
+				setTimeout(function () {
+					$("#globalMessage").hide();
+				}, 10000);
+			} else {
+				$("#clienteForm").submit();
+			}
+    	}
+    	function checkbox(id) {
+    		var chec = "";
+			if (document.querySelector("#status:checked")) {
+				chec = true;
+			} else {
+				chec = false;
+			}
+			//Nao precisou usar a function abaixo
+			//updateStatus(id, chec);
+		}
+		function updateStatus(id, status) {
+			$.ajax({
+				url: "http://localhost:8080/clientes/changeStatus/" + id + "/" + status,
+				type: "GET",
+				success: function (responseText) {
+					if (responseText === "ok") {
+						alert("Cliente com o ID: " + id + " teve seu status alterado com sucesso!");
+					} else {
+						alert("Erro: " + responseText);
+					}
+				}
+			});
+        }
+	</script>
+	<title>Cliente</title>
+</head>
+<body>
+	<h1 layout:fragment="header" class="colorWhite" th:text="${cliente.id != null} ? 'Alteração de Cliente' : 'Cadastro de Cliente'"></h1>
+	<div layout:fragment="content" class="input-form">
+		
+		<div class="well">
+		 <div id="globalMessage" class="alert alert-success espacoAcimaAbaixo"></div>
+		 <form id="clienteForm" th:action="@{/clientes/(form)}" th:object="${cliente}" action="#" method="post" class="form-horizontal">
+			<div th:if="${#fields.hasErrors('*')}" class="alert alert-error">
+				<p th:each="error : ${#fields.errors('*')}" th:text="${error}">Erro de validação</p>
+			</div>
+			
+			<input type="hidden" th:field="*{id}" th:class="${#fields.hasErrors('id')} ? 'field-error'" />
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="nome">Nome</label>
+				<input class="col-sm-10" type="text" id="nome" th:field="*{nome}" th:class="${#fields.hasErrors('nome')} ? 'field-error formInput' : 'formInput'" />
+			</div>
+
+			<div class="form-group">  
+				<label class="control-label col-sm-2" for="endereco">Endereço</label>
+				<textarea class="col-sm-10" rows="10" cols="73" id="endereco" th:field="*{endereco}" th:class="${#fields.hasErrors('endereco')} ? 'field-error'"></textarea>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="cep">CEP</label>
+				<input class="form-control col-sm-10" type="text" id="cep" th:field="*{cep}" th:value="${#numbers.formatInteger(cliente.cep, 8)}" th:class="${#fields.hasErrors('cep')} ? 'field-error number' : 'formInput number'"/>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="status">Ativo</label>
+				<input type="checkbox" id="status" th:field="*{status}" th:onclick="checkbox([[${cliente.id}]])" th:checked="${cliente.status} ? 'checked'">
+			</div>
+
+			<br/>
+
+			<div class="btn-group" role="group">
+				<input type="button" onclick="validaFormClientes()" class="btn btn-info" value="Salvar" />
+				<a th:href="@{/clientes/}" href="clientes.html" class="btn btn-primary"> voltar </a>
+			</div>
+		</form>
+	  </div>
+	</div>
+</body>
+</html>

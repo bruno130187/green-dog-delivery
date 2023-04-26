@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<title>Clientes</title>
+</head>
+<body>
+	<h1 layout:fragment="header" class="colorWhite">Lista de clientes</h1>
+	<div layout:fragment="content" class="container">
+		<div class="container btn-group" role="group">
+			<a href="form.html" th:href="@{/clientes/novo}" class="btn btn-primary">Novo cliente</a>
+			<a href="form.html" th:href="@{/}" class="btn btn-primary">Voltar</a>
+		</div>
+		<div class="alert alert-success espacoAcimaAbaixo" th:if="${globalMessage}"
+			th:text="${globalMessage}">mensagem
+		</div>
+		<table class="table table-bordered table-striped table-lista">
+			<thead> 
+				<tr>
+					<td class="colorWhite tableView">ID</td>
+					<td class="colorWhite tableView">Nome</td>
+					<td class="colorWhite tableView">Endereço</td>
+					<td class="colorWhite tableView">CEP</td>
+					<td class="colorWhite tableView">Status</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${clientes.empty}">
+					<td colspan="10">Sem clientes</td>
+				</tr>
+				<tr th:each="cliente : ${clientes}">
+					<td><a href="view.html" th:href="@{'/clientes/' + ${cliente.id}}" th:text="${cliente.id}"></a></td>
+					<td><a href="view.html" th:href="@{'/clientes/' + ${cliente.id}}" th:text="${cliente.nome}"></a></td>
+					<td th:text="${cliente.endereco}"></td>
+					<td th:text="${cliente.cep}"></td>
+					<td th:text="${cliente.status} ? 'Ativo' : 'Inativo'"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

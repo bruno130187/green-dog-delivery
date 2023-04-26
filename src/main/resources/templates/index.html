@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="layout"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1 layout:fragment="header" class="fragmentHeader">
+		<span class="spanTitle">Green Dog Delivery</span>
+		<small class="smallClass">Painel de controle</small>
+	</h1>
+
+	<div layout:fragment="content" class="container menu-principal">
+		<div sec:authorize="isAuthenticated()" class="botaoLoginDireitaLogout">
+			<h1 th:inline="text">Olá [[${#httpServletRequest.remoteUser}]]!</h1>
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="sair" class="btn btn-warning botaoLogoutDireita"/>
+			</form>
+		</div>
+		<div sec:authorize="!isAuthenticated()" class="d-flex justify-content-around botaoLoginDireita">
+			<form th:action="@{/login}" method="get">
+				<input type="submit" value="entrar" class="btn btn-primary"/>
+			</form>
+		</div>
+		 <div class="jumbotronBack btn-group" role="group" >
+			<a th:href="@{/ambiente/}" class="btn btn-lg btn-info">Ambiente</a>
+			<a th:href="@{/clientes/}" class="btn btn-lg btn-primary">Cadastro de clientes</a>
+			<a th:href="@{/itens/}" class="btn btn-lg btn-primary">Cadastro de itens</a>
+			<a th:href="@{/pedidos/}" class="btn btn-lg btn-primary">Cadastro de pedidos</a>
+			<a th:href="@{/logs/}" class="btn btn-lg btn-primary">Logs</a>
+			<a th:href="@{/users/}" class="btn btn-lg btn-primary">Usuários</a>
+			<a th:href="@{/api/browser/index.html#/api/}" target="_blank" class="btn btn-lg btn-info">HAL Browser</a>
+			<a th:href="@{/delivery/}" class="btn btn-lg btn-info">Delivery</a>
+		 </div>
+	</div>
+</body>
+</html>

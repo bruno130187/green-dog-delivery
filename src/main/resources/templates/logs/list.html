@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<title>Logs</title>
+</head>
+<body>
+	<h1 layout:fragment="header" class="colorWhite">Lista de logs</h1>
+	<div layout:fragment="content" class="container">
+		<div class="container btn-group" role="group">
+			<a href="form.html" th:href="@{/}" class="btn btn-primary">Voltar</a>
+		</div>
+		<table class="table table-bordered table-striped table-lista">
+			<thead> 
+				<tr>
+					<td class="colorWhite">ID</td>
+					<td class="colorWhite">Ação</td>
+					<td class="colorWhite">Data</td>
+					<td class="colorWhite">Módulo</td>
+					<td class="colorWhite">Usuário</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${logs.empty}">
+					<td colspan="10">Sem logs</td>
+				</tr>
+				<tr th:each="log : ${logs}">
+					<td th:text="${log.id}"></td>
+					<td th:text="${log.acao}"></td>
+					<td th:text="${#dates.format(log.data,'dd/MM/yyyy hh:mm:ss')}"></td>
+					<td th:text="${log.modulo}"></td>
+					<td th:text="${log.usuario}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
